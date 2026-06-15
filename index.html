@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Biblioteca de ISOs</title>
+    <style>
+        /* Estilo Geral (Visual Escuro/Gamer) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121214;
+            color: #e1e1e6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #0088cc; /* Cor oficial do Telegram */
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Seções dos Consoles */
+        .console-section {
+            background-color: #202024;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-left: 5px solid #0088cc;
+        }
+
+        .console-title {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #ffffff;
+            border-bottom: 1px solid #323238;
+            padding-bottom: 8px;
+        }
+
+        /* Lista de Jogos */
+        .game-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .game-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: #29292e;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .game-item:hover {
+            transform: translateX(5px);
+            background-color: #323238;
+        }
+
+        .game-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Botão de Download (Direciona para o Telegram) */
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            background-color: #0088cc;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        .btn-download:hover {
+            background-color: #006699;
+        }
+
+        /* Botão para abrir o Canal Inteiro */
+        .btn-channel {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: #29292e;
+            color: #0088cc;
+            border: 1px solid #0088cc;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 15px;
+            box-sizing: border-box;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .btn-channel:hover {
+            background-color: #0088cc;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎮 Central de Downloads (Nuvem Telegram)</h1>
+
+    <div class="container">
+
+        <!-- SEÇÃO PLAYSTATION 1 -->
+        <div class="console-section">
+            <div class="console-title">PlayStation 1 (PS1)</div>
+            <ul class="game-list">
+                <li class="game-item">
+                    <span class="game-name">Resident Evil 3: Nemesis</span>
+                    <!-- Cole o link da MENSAGEM do arquivo no lugar do # -->
+                    <a href="#" target="_blank" class="btn-download">Baixar no Telegram</a>
+                </li>
+                <li class="game-item">
+                    <span class="game-name">Crash Bandicoot 3</span>
+                    <a href="#" target="_blank" class="btn-download">Baixar no Telegram</a>
+                </li>
+            </ul>
+            <!-- Cole o link do CANAL GERAL de PS1 no lugar do # -->
+            <a href="#" target="_blank" class="btn-channel">🔍 Abrir Canal de PS1 (Pesquisar Outros)</a>
+        </div>
+
+        <!-- SEÇÃO PLAYSTATION 2 -->
+        <div class="console-section">
+            <div class="console-title">PlayStation 2 (PS2)</div>
+            <ul class="game-list">
+                <li class="game-item">
+                    <span class="game-name">GTA San Andreas</span>
+                    <a href="#" target="_blank" class="btn-download">Baixar no Telegram</a>
+                </li>
+                <li class="game-item">
+                    <span class="game-name">God of War II (Dublado)</span>
+                    <a href="#" target="_blank" class="btn-download">Baixar no Telegram</a>
+                </li>
+            </ul>
+            <a href="#" target="_blank" class="btn-channel">🔍 Abrir Canal de PS2 (Pesquisar Outros)</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
