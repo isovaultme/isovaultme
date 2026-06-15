@@ -3,160 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Biblioteca de ISOs</title>
+    <title>Retro ROMs & ISOs Vault</title>
     <style>
-        /* Estilo Geral (Visual Escuro/Gamer) */
+        /* Estética baseada em sites clássicos de ROMs (Escuro, moderno e limpo) */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121214;
-            color: #e1e1e6;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #1a1a1c;
+            color: #dddddd;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+        }
+
+        /* Barra de Topo / Header */
+        header {
+            background-color: #111112;
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom: 3px solid #0088cc;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 8px 0 0 0;
+            color: #88888c;
+            font-size: 1rem;
+        }
+
+        /* Container Principal */
+        .main-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #333335;
+        }
+
+        /* Grid de Consoles (Estilo RomsGames) */
+        .console-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        /* Card de cada Console */
+        .console-card {
+            background-color: #232326;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            border: 1px solid #2e2e33;
         }
 
-        h1 {
-            color: #0088cc; /* Cor oficial do Telegram */
-            margin-bottom: 30px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        /* Efeito de passar o mouse por cima */
+        .console-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+            border-color: #44444a;
         }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
-        }
-
-        /* Seções dos Consoles */
-        .console-section {
-            background-color: #202024;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            border-left: 5px solid #0088cc;
-        }
-
-        .console-title {
-            font-size: 1.5rem;
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: #ffffff;
-            border-bottom: 1px solid #323238;
-            padding-bottom: 8px;
-        }
-
-        /* Lista de Jogos */
-        .game-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .game-item {
+        /* Área do Nome do Console */
+        .console-info {
+            padding: 25px 15px;
+            flex-grow: 1;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 15px;
-            background-color: #29292e;
-            margin-bottom: 8px;
-            border-radius: 6px;
-            transition: transform 0.2s, background-color 0.2s;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .game-item:hover {
-            transform: translateX(5px);
-            background-color: #323238;
-        }
-
-        .game-name {
+        .console-name {
+            font-size: 1.3rem;
             font-weight: bold;
-            font-size: 1.1rem;
+            color: #ffffff;
+            margin-bottom: 5px;
         }
 
-        /* Botão de Download (Direciona para o Telegram) */
-        .btn-download {
-            display: inline-flex;
-            align-items: center;
-            background-color: #0088cc;
-            color: white;
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: background-color 0.2s;
+        .console-subtitle {
+            font-size: 0.85rem;
+            color: #88888c;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .btn-download:hover {
-            background-color: #006699;
-        }
-
-        /* Botão para abrir o Canal Inteiro */
-        .btn-channel {
-            display: block;
-            width: 100%;
-            text-align: center;
-            background-color: #29292e;
-            color: #0088cc;
-            border: 1px solid #0088cc;
-            text-decoration: none;
+        /* Faixa inferior com a cor característica de cada marca */
+        .card-footer {
             padding: 10px;
-            border-radius: 6px;
+            font-size: 0.9rem;
             font-weight: bold;
-            margin-top: 15px;
-            box-sizing: border-box;
-            transition: background-color 0.2s, color 0.2s;
+            color: #ffffff;
+            background-color: #333338;
         }
 
-        .btn-channel:hover {
-            background-color: #0088cc;
-            color: white;
+        /* Cores Customizadas para cada Console (Estilo Identidade da Marca) */
+        .ps1 .card-footer { background-color: #5c6bc0; } /* Azul Clássico Sony */
+        .ps2 .card-footer { background-color: #002fbe; } /* Azul Escuro PS2 */
+        .pc .card-footer { background-color: #4caf50; }  /* Verde Windows/PC */
+        .geral .card-footer { background-color: #0088cc; } /* Azul Telegram */
+
+        /* Rodapé do Site */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #55555a;
+            font-size: 0.85rem;
+            margin-top: 60px;
+            border-top: 1px solid #232326;
         }
     </style>
 </head>
 <body>
 
-    <h1>🎮 Central de Downloads (Nuvem Telegram)</h1>
+    <header>
+        <h1>🕹️ Meu Arquivo de ROMs</h1>
+        <p>Selecione a plataforma para abrir a biblioteca e buscar suas ISOs no Telegram</p>
+    </header>
 
-    <div class="container">
+    <div class="main-container">
+        
+        <div class="section-title">Plataformas Disponíveis</div>
 
-        <!-- SEÇÃO PLAYSTATION 1 -->
-        <div class="console-section">
-            <div class="console-title">PlayStation 1 (PS1)</div>
-            <ul class="game-list">
-                <li class="game-item">
-                    <span class="game-name">Resident Evil 3: Nemesis</span>
-                    <!-- Cole o link da MENSAGEM do arquivo no lugar do # -->
-                    <a href="#" target="_blank" class="btn-download">Baixar no Telegram</a>
-                </li>
-                <li class="game-item">
-                    <span class="game-name">Crash Bandicoot 3</span>
-                    <a href="#" target="_blank" class="btn-download">Baixar no Telegram</a>
-                </li>
-            </ul>
-            <!-- Cole o link do CANAL GERAL de PS1 no lugar do # -->
-            <a href="#" target="_blank" class="btn-channel">🔍 Abrir Canal de PS1 (Pesquisar Outros)</a>
-        </div>
+        <div class="console-grid">
 
-        <!-- SEÇÃO PLAYSTATION 2 -->
-        <div class="console-section">
-            <div class="console-title">PlayStation 2 (PS2)</div>
-            <ul class="game-list">
-                <li class="game-item">
-                    <span class="game-name">GTA San Andreas</span>
-                    <a href="#" target="_blank" class="btn-download">Baixar no Telegram</a>
-                </li>
-                <li class="game-item">
-                    <span class="game-name">God of War II (Dublado)</span>
-                    <a href="#" target="_blank" class="btn-download">Baixar no Telegram</a>
-                </li>
-            </ul>
-            <a href="#" target="_blank" class="btn-channel">🔍 Abrir Canal de PS2 (Pesquisar Outros)</a>
+            <!-- CARD PLAYSTATION 1 -->
+            <!-- Substitua o '#' pelo link de convite do seu grupo/canal de PS1 -->
+            <a href="#" target="_blank" class="console-card ps1">
+                <div class="console-info">
+                    <div class="console-name">PlayStation 1</div>
+                    <div class="console-subtitle">PS1 / PSX</div>
+                </div>
+                <div class="card-footer">Abrir Acervo ➔</div>
+            </a>
+
+            <!-- CARD PLAYSTATION 2 -->
+            <!-- Substitua o '#' pelo link de convite do seu grupo/canal de PS2 -->
+            <a href="#" target="_blank" class="console-card ps2">
+                <div class="console-info">
+                    <div class="console-name">PlayStation 2</div>
+                    <div class="console-subtitle">PS2 ISOs</div>
+                </div>
+                <div class="card-footer">Abrir Acervo ➔</div>
+            </a>
+
+            <!-- CARD PC GAMES -->
+            <!-- Substitua o '#' pelo link de convite do seu grupo/canal de PC -->
+            <a href="#" target="_blank" class="console-card pc">
+                <div class="console-info">
+                    <div class="console-name">PC Games</div>
+                    <div class="console-subtitle">Jogos Antigos</div>
+                </div>
+                <div class="card-footer">Abrir Acervo ➔</div>
+            </a>
+
+            <!-- CARD TODOS OS JOGOS (Caso queira um canal geral) -->
+            <!-- Substitua o '#' pelo link do seu canal geral ou principal -->
+            <a href="#" target="_blank" class="console-card geral">
+                <div class="console-info">
+                    <div class="console-name">Nuvem Geral</div>
+                    <div class="console-subtitle">Outros Arquivos</div>
+                </div>
+                <div class="card-footer">Abrir Acervo ➔</div>
+            </a>
+
         </div>
 
     </div>
+
+    <footer>
+        Exclusivo para backup pessoal de ISOs e ROMs.
+    </footer>
 
 </body>
 </html>
