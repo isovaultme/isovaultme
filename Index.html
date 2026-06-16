@@ -3,88 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro ROMs & ISOs Vault</title>
+    <title>Retro ROMs & ISOs Vault (v0.3)</title>
     <style>
-        /* ANIMAÇÃO DE CORES MISTURADAS SE MOVIMENTANDO */
-        @keyframes auroraMist {
-            0% { background-position: 0% 0%, 50% 50%; }
-            50% { background-position: 100% 100%, 30% 70%; }
-            100% { background-position: 0% 0%, 50% 50%; }
-        }
-
         body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            background: 
-                radial-gradient(circle at 20% 30%, #1c0a2a 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, #051a14 0%, transparent 50%),
-                radial-gradient(circle at 50% 20%, #091326 0%, transparent 60%),
-                #08080a;
-            background-size: 200% 200%;
-            animation: auroraMist 10s ease-in-out infinite;
-            color: #dddddd; 
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; 
+            background: radial-gradient(circle at 50% 30%, #0d1e24 0%, #080f12 70%, #05080a 100%);
+            color: #cfd8dc; 
             margin: 0; 
             padding: 0; 
             overflow-x: hidden;
         }
 
-        header { background-color: #060608; padding: 30px 20px; text-align: center; border-bottom: 2px solid #222225; position: relative; }
-        header h1 { margin: 0; font-size: 2.2rem; color: #ffffff; cursor: pointer; }
+        header { 
+            padding: 25px 20px; 
+            text-align: center; 
+            position: relative; 
+        }
+        header h1 { 
+            margin: 0; 
+            font-size: 2rem; 
+            color: #00f3ff; 
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            cursor: pointer; 
+        }
+        header .version-tag {
+            font-size: 1rem;
+            color: #64ffda;
+            font-weight: 400;
+            margin-left: 8px;
+        }
         
-        /* BOTÃO DO MENU HAMBÚRGUER */
         .hamburger-btn {
             position: absolute;
-            left: 20px;
+            left: 30px;
             top: 50%;
             transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: white;
-            font-size: 2rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #00f3ff;
+            font-size: 1.5rem;
             cursor: pointer;
-            padding: 5px 10px;
+            padding: 8px 15px;
+            border-radius: 8px;
             transition: 0.2s;
             z-index: 90;
         }
-        .hamburger-btn:hover { color: #00f3ff; }
+        .hamburger-btn:hover { 
+            background: rgba(0, 243, 255, 0.1);
+            border-color: #00f3ff;
+        }
 
-        /* BARRA LATERAL (SIDEBAR) */
+        /* SIDEBAR PREMIUM */
         .sidebar {
             position: fixed;
             top: 0;
-            left: -280px;
-            width: 280px;
+            left: -300px;
+            width: 300px;
             height: 100%;
-            background-color: #0b0b0d;
-            border-right: 2px solid #222225;
-            box-shadow: 5px 0 15px rgba(0,0,0,0.7);
+            background-color: #060b0e;
+            border-right: 1px solid #102a35;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.8);
             z-index: 100;
-            transition: 0.3s ease;
-            padding: 20px;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 25px;
             box-sizing: border-box;
         }
         .sidebar.active { left: 0; }
-
         .sidebar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #222225;
+            border-bottom: 1px solid #102a35;
             padding-bottom: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
-        .sidebar-title { color: #ffffff; font-size: 1.2rem; font-weight: bold; margin: 0; }
-        .sidebar-close { background: none; border: none; color: #666; font-size: 2rem; cursor: pointer; transition: 0.2s; padding: 0; line-height: 1; }
-        .sidebar-close:hover { color: #ff003c; }
-
-        /* LINKS DA SIDEBAR */
+        .sidebar-title { color: #ffffff; font-size: 1.1rem; font-weight: 600; margin: 0; }
+        .sidebar-close { background: none; border: none; color: #527885; font-size: 2rem; cursor: pointer; line-height: 1; }
+        .sidebar-close:hover { color: #ff3366; }
         .emulator-list { list-style: none; padding: 0; margin: 0; }
-        .emulator-item { margin-bottom: 10px; }
+        .emulator-item { margin-bottom: 12px; }
         .emulator-link {
             display: flex;
             flex-direction: column;
-            padding: 12px;
-            background-color: #131315;
-            border: 1px solid #222225;
+            padding: 12px 16px;
+            background-color: #0b141a;
+            border: 1px solid #152933;
             border-radius: 8px;
             color: #ffffff;
             text-decoration: none;
@@ -93,8 +98,7 @@
         }
         .emulator-link:hover {
             border-color: #00f3ff;
-            background-color: #17171a;
-            box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+            background-color: #10222b;
         }
         .emu-name { font-weight: bold; font-size: 0.95rem; }
         .emu-system { font-size: 0.75rem; color: #00f3ff; margin-top: 2px; text-transform: uppercase; }
@@ -105,7 +109,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
             z-index: 95;
             opacity: 0;
             pointer-events: none;
@@ -113,120 +118,209 @@
         }
         .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
 
-        /* CONTAINERS PRINCIPAIS */
-        .search-container { max-width: 500px; margin: 30px auto 10px auto; padding: 0 20px; display: flex; gap: 10px; align-items: center; }
-        .search-box { width: 100%; padding: 14px 20px; background-color: #141417; border: 2px solid #222225; border-radius: 30px; color: #ffffff; text-align: center; outline: none; font-size: 1rem; }
-        .btn-back { background-color: #141416; border: 2px solid #222225; color: #ffffff; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; white-space: nowrap; }
-        
-        .main-container { max-width: 1200px; margin: 20px auto 40px auto; padding: 0 20px; }
-        .section-title { font-size: 1.4rem; color: #ffffff; margin-bottom: 25px; border-bottom: 2px solid #222225; padding-bottom: 5px; }
-        
-        /* GRID DE EXIBIÇÃO COLETIVA */
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
-        
-        /* ESTILIZAÇÃO DOS CARDS */
-        .console-card, .game-card { background-color: #131315; border-radius: 12px; overflow: hidden; text-align: center; text-decoration: none; color: inherit; display: flex; flex-direction: column; border: 1px solid #222225; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; padding: 12px; box-sizing: border-box; }
-        .console-card:hover { transform: translateY(-4px); border-color: #00f3ff; box-shadow: 0 5px 15px rgba(0, 243, 255, 0.2); }
-        .game-card:hover { transform: translateY(-6px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); }
-        
-        /* CONTAINER DE CAPA FÍSICA ESTILO ACRÍLICO REALISTA */
-        .card-image-container { 
-            width: 100%; 
-            height: 240px; 
-            background-color: #050506; 
-            overflow: hidden; 
-            margin-bottom: 12px; 
-            border-radius: 4px; 
-            position: relative;
-            border: 3px solid #2b2b30;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 2px 4px 8px rgba(0,0,0,0.4);
+        /* BUSCA E CONTROLES */
+        .controls-container { max-width: 1200px; margin: 10px auto; padding: 0 30px; display: flex; gap: 15px; align-items: center; }
+        .search-box { 
+            flex-grow: 1;
+            padding: 12px 25px; 
+            background-color: rgba(11, 20, 26, 0.7); 
+            border: 1px solid #152933; 
+            border-radius: 8px; 
+            color: #ffffff; 
+            outline: none; 
+            font-size: 0.95rem; 
+            transition: 0.2s;
+        }
+        .search-box:focus {
+            border-color: #00f3ff;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.15);
+        }
+        .btn-back { 
+            background-color: #0b141a; 
+            border: 1px solid #152933; 
+            color: #00f3ff; 
+            padding: 11px 20px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: 500; 
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+        .btn-back:hover {
+            background-color: #10222b;
+            border-color: #00f3ff;
         }
         
-        /* Detalhe lateral simulando a lombada/dobra de plástico transparente esquerda da caixinha */
-        .card-image-container::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 8px;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0.15), rgba(0,0,0,0.4));
-            z-index: 3;
-            border-right: 1px solid rgba(0,0,0,0.5);
+        .main-container { max-width: 1200px; margin: 10px auto 50px auto; padding: 0 30px; }
+        .section-title { font-size: 1.2rem; font-weight: 600; color: #ffffff; margin: 30px 0 20px 0; letter-spacing: 0.5px; }
+        
+        /* GRID DE CONSOLES COMPACTOS */
+        .grid-layout { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
+            gap: 16px; 
+        }
+        
+        /* CARD DE CONSOLE */
+        .console-card { 
+            background: rgba(11, 20, 26, 0.4); 
+            border: 1px solid #152933;
+            border-radius: 10px; 
+            overflow: hidden; 
+            text-align: center; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+            justify-content: center;
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+            padding: 15px 10px; 
+            box-sizing: border-box; 
+            height: 125px;
+        }
+        .console-card:hover { 
+            border-color: #00f3ff; 
+            background: rgba(16, 34, 43, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 243, 255, 0.1);
+        }
+        
+        .console-card .card-image-container { 
+            width: 100%; 
+            height: 55px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .console-card .card-image-container img { 
+            max-width: 80%; 
+            max-height: 100%; 
+            object-fit: contain; 
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+        }
+        .console-name { font-weight: 500; color: #9bb1bc; font-size: 0.85rem; }
+        .console-card:hover .console-name { color: #ffffff; }
+
+        /* GRID DE JOGOS */
+        .games-grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
         }
 
-        /* Reflexo de luz diagonal simulando o reflexo no plástico da capa */
-        .card-image-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* CARD DE JOGO */
+        .game-card {
+            background: #091014;
+            border: 1px solid #14252e;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .game-card:hover {
+            border-color: #00f3ff;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+        }
+        .game-card .card-image-container {
+            width: 100%;
+            height: 210px;
+            border-radius: 6px;
+            overflow: hidden;
+            background: #040709;
+            margin-bottom: 10px;
+            border: 1px solid #1a2f3a;
+        }
+        .game-card .card-image-container img {
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 25%, transparent 25.1%);
-            z-index: 2;
-            pointer-events: none;
+            object-fit: cover;
         }
+        .game-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 4px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-transform: uppercase;
+            text-overflow: ellipsis;
+        }
+        .game-id-tag {
+            font-size: 0.75rem;
+            color: #527885;
+            font-family: monospace;
+        }
+
+        /* POPUP MODAL DA WIKI DINÂMICA */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(3, 6, 8, 0.8);
+            backdrop-filter: blur(6px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: 0.2s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
         
-        .card-image-container img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
+        .wiki-modal {
+            background: #0b1419;
+            border: 1px solid #00f3ff;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
             position: relative;
-            z-index: 1;
+            padding: 30px;
+            box-sizing: border-box;
+            transform: scale(0.95);
+            transition: 0.2s ease;
         }
-        
-        /* Consoles não usam o efeito de capinha acrílica */
-        .console-card .card-image-container { 
-            height: 110px; 
-            background-color: transparent; 
-            border: none; 
-            box-shadow: none;
+        .modal-overlay.active .wiki-modal { transform: scale(1); }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: none; border: none;
+            color: #527885; font-size: 1.8rem;
+            cursor: pointer; transition: 0.2s;
         }
-        .console-card .card-image-container::before, 
-        .console-card .card-image-container::after { display: none; }
-        .console-card .card-image-container img { object-fit: contain; }
-        
-        .console-name { font-weight: bold; color: #ffffff; font-size: 0.95rem; line-height: 1.3; margin-top: 4px; }
-        .game-subtitle { font-size: 0.7rem; color: #00f3ff; margin-top: 6px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; }
+        .modal-close-btn:hover { color: #00f3ff; }
+
+        .wiki-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; border-bottom: 1px solid #152933; padding-bottom: 15px; }
+        .wiki-title { margin: 0; font-size: 1.5rem; color: #fff; font-weight: 600; }
+        .wiki-badge { background: rgba(0, 243, 255, 0.1); color: #00f3ff; border: 1px solid rgba(0, 243, 255, 0.3); padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+
+        .wiki-grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 20px 0; }
+        .wiki-screenshot-wrapper { height: 130px; border-radius: 6px; overflow: hidden; border: 1px solid #1c3542; background: #040709; }
+        .wiki-screenshot-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+
+        .wiki-meta-list { list-style: none; padding: 0; margin: 15px 0; font-size: 0.9rem; color: #9bb1bc; }
+        .wiki-meta-list li { margin-bottom: 6px; }
+        .wiki-meta-list strong { color: #ffffff; }
+
+        .wiki-description { color: #9bb1bc; font-size: 0.95rem; line-height: 1.6; }
+        .wiki-description ul { padding-left: 20px; color: #cfd8dc; }
+
+        .wiki-download-action { text-align: center; margin-top: 30px; }
+        .download-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 35px; background: #1a73e8; color: white;
+            text-decoration: none; border-radius: 6px; font-weight: 600;
+            font-size: 0.95rem; transition: 0.2s; box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+        }
+        .download-btn:hover { background: #34a853; box-shadow: 0 4px 15px rgba(52, 168, 83, 0.4); }
+
         .hidden { display: none !important; }
-
-        /* ESTRUTURA VISUAL DA WIKI */
-        .wiki-container { background: #131315; border: 1px solid #222225; border-radius: 16px; padding: 30px; margin-top: 10px; }
-        .wiki-title-area { display: flex; align-items: center; flex-wrap: wrap; gap: 15px; border-bottom: 2px solid #222225; padding-bottom: 15px; margin-bottom: 20px; }
-        .wiki-title-area h2 { margin: 0; font-size: 2rem; color: #fff; }
-        .wiki-system-badge { background: #00f3ff22; color: #00f3ff; border: 1px solid #00f3ff; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-        .wiki-text { color: #aaa; line-height: 1.7; font-size: 1.05rem; }
-        .wiki-text h3 { color: #fff; margin-top: 25px; font-size: 1.2rem; border-left: 3px solid #00f3ff; padding-left: 10px; }
-        .wiki-text ul { padding-left: 20px; margin: 10px 0; }
-        .wiki-text li { margin-bottom: 6px; }
-        
-        /* GALERIA DE IMAGENS DA WIKI */
-        .wiki-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 25px 0; }
-        .gallery-img-wrapper { height: 160px; border-radius: 8px; border: 1px solid #222225; overflow: hidden; background-color: #000; }
-        .gallery-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
-        .gallery-img-wrapper img:hover { transform: scale(1.05); }
-
-        /* INFO BOX ADICIONAL */
-        .game-info-meta { background: #0a0a0c; border: 1px solid #222225; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
-        .meta-item strong { color: #fff; display: block; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 2px; }
-        .meta-item span { color: #00f3ff; font-size: 0.95rem; }
-
-        /* BOTÃO DE DOWNLOAD DA WIKI */
-        .wiki-download-box { margin-top: 35px; border-top: 1px solid #222225; padding-top: 25px; text-align: center; }
-        .wiki-download-btn { display: inline-block; padding: 15px 40px; background: #00f3ff; color: #000; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 0 20px rgba(0, 243, 255, 0.3); transition: 0.2s; }
-        .wiki-download-btn:hover { background: #ffffff; box-shadow: 0 0 25px rgba(255, 255, 255, 0.5); transform: scale(1.03); }
-
-        /* RESPONSIVIDADE TEMPLATE */
-        @media (min-width: 600px) {
-            .grid-layout { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
-            .card-image-container { height: 260px; }
-            .console-card .card-image-container { height: 120px; }
-        }
-        @media (min-width: 900px) {
-            .grid-layout { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 25px; }
-            .card-image-container { height: 290px; }
-        }
     </style>
 </head>
 <body>
@@ -248,16 +342,16 @@
 
     <header>
         <button class="hamburger-btn" onclick="toggleSidebar()">&#9776;</button>
-        <h1 onclick="resetView()">🕹️ Meu Arquivo de ROMs</h1>
+        <h1 onclick="resetView()">🕹️ Retro ROMs & ISOs Vault<span class="version-tag">(v0.3)</span></h1>
     </header>
 
-    <div class="search-container">
-        <button id="btnBack" class="btn-back hidden" onclick="resetView()">← Voltar para o Início</button>
-        <input type="text" id="gameSearch" class="search-box" placeholder="Pesquise um jogo..." oninput="searchGame()">
+    <div class="controls-container">
+        <button id="btnBack" class="btn-back hidden" onclick="resetView()">← Back</button>
+        <input type="text" id="gameSearch" class="search-box" placeholder="Search..." oninput="searchGame()">
     </div>
 
     <div class="main-container">
-        <div class="section-title" id="sectionTitle">Consoles Disponíveis</div>
+        <div class="section-title" id="sectionTitle">Consoles</div>
         <div class="grid-layout" id="mainGrid">
             
             <div id="console-NES" onclick="showConsoleGames('NES')" class="console-card default-console" data-name="Nintendinho">
@@ -343,10 +437,18 @@
         </div>
     </div>
 
+    <div id="wikiModalOverlay" class="modal-overlay" onclick="closeGameWiki()">
+        <div class="wiki-modal" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeGameWiki()">&times;</button>
+            <div id="modalDynamicContent"></div>
+        </div>
+    </div>
+
     <script>
         const databaseGamesList = [
             { 
                 name: "GTA San Andreas", 
+                idTag: "SLUS-20946.png",
                 platforms: ["PS2"], 
                 image: "https://steamcdn-a.akamaihd.net/steam/apps/1547000/library_600x900_2x.jpg", 
                 desc: "Acompanhe a icônica história de CJ no estado de San Andreas.", 
@@ -357,7 +459,8 @@
                     format: ".ISO / .CHD",
                     gallery: [
                         "https://steamcdn-a.akamaihd.net/steam/apps/1547000/ss_e1919b673dfa166160ffea0d23f37b98a39f60bf.600x338.jpg", 
-                        "https://steamcdn-a.akamaihd.net/steam/apps/1547000/ss_e04664ff6e36d5fc28b5e52c8030be908fc9b106.600x338.jpg"
+                        "https://steamcdn-a.akamaihd.net/steam/apps/1547000/ss_e04664ff6e36d5fc28b5e52c8030be908fc9b106.600x338.jpg",
+                        "https://steamcdn-a.akamaihd.net/steam/apps/1547000/ss_8e37d0473fb48bf3978db421d33190df09a65f97.600x338.jpg"
                     ],
                     extendedContent: `
                         <p>Carl Johnson precisa voltar para casa. Sua mãe foi assassinada, sua família desmoronou e seus amigos de infância estão todos caminhando para o desastre.</p>
@@ -371,6 +474,7 @@
             },
             { 
                 name: "Resident Evil 4", 
+                idTag: "SLUS-21134.png",
                 platforms: ["PS2"], 
                 image: "https://steamcdn-a.akamaihd.net/steam/apps/254700/library_600x900_2x.jpg", 
                 desc: "Leon S. Kennedy em uma missão de resgate implacável contra uma seita biológica na Europa.", 
@@ -381,48 +485,24 @@
                     format: ".ISO / .GZ",
                     gallery: [
                         "https://steamcdn-a.akamaihd.net/steam/apps/254700/ss_81e3c5ecb049d587000dfb4fc9213db1b60f1ee6.600x338.jpg",
-                        "https://steamcdn-a.akamaihd.net/steam/apps/254700/ss_164b38bf546764426b345b8495a896d9972b535d.600x338.jpg"
+                        "https://steamcdn-a.akamaihd.net/steam/apps/254700/ss_164b38bf546764426b345b8495a896d9972b535d.600x338.jpg",
+                        "https://steamcdn-a.akamaihd.net/steam/apps/254700/ss_3a2b774676d5e1f0dfb2f3cf8f0f3ff0df5a5e3a.600x338.jpg"
                     ],
                     extendedContent: `
-                        <p>Seis anos se passaram desde a destruição de Raccoon City. Leon S. Kennedy, agora um agente trabalhando diretamente sob as ordens do presidente dos EUA, é enviado para resgatar a filha sequestrada do presidente, Ashley Graham.</p>
-                        <p>Seguindo pistas até uma vila rural isolada na Europa, Leon descobre que os habitantes locais não são zumbis comuns, mas sim humanos controlados por um parasita mental devastador conhecido como 'Las Plagas'.</p>
+                        <p>Seis anos se passaram desde a destruição de Raccoon City. Leon S. Kennedy é enviado para resgatar a filha do presidente, Ashley Graham, sequestrada por um culto macabro na Europa.</p>
                         <h3>Inovações do Game</h3>
                         <ul>
-                            <li><strong>Câmera Sobre o Ombro:</strong> Redefiniu completamente o gênero de tiro em terceira pessoa (TPS) para a indústria de jogos.</li>
-                            <li><strong>Gerenciamento de Maleta:</strong> O famoso inventário estilo quebra-cabeça (Grid System) onde você precisa girar e organizar armas e ervas.</li>
-                            <li><strong>Ação e Sobrevivência:</strong> Equilíbrio perfeito entre o terror claustrofóbico clássico e combates dinâmicos com chutes e golpes físicos.</li>
+                            <li><strong>Câmera Sobre o Ombro:</strong> Redefiniu completamente o gênero de tiro e ação na indústria.</li>
+                            <li><strong>Inventário em Grade:</strong> Gerenciamento tático no famoso formato de maleta.</li>
+                            <li><strong>Las Plagas:</strong> Inimigos inteligentes capazes de usar ferramentas e armar emboscadas.</li>
                         </ul>
                     `
                 }
             },
-            { 
-                name: "Super Mario World", 
-                platforms: ["SNES"], 
-                image: "https://steamcdn-a.akamaihd.net/steam/apps/1794680/library_600x900_2x.jpg", 
-                desc: "O clássico supremo de plataforma do Super Nintendo.", 
-                url: "#" 
-            },
-            { 
-                name: "Donkey Kong Country", 
-                platforms: ["SNES"], 
-                image: "https://steamcdn-a.akamaihd.net/steam/apps/2936460/library_600x900_2x.jpg", 
-                desc: "A incrível jornada de Donkey e Diddy Kong na ilha dos macacos.", 
-                url: "#" 
-            },
-            { 
-                name: "Super Monkey Ball", 
-                platforms: ["GAMECUBE"], 
-                image: "https://steamcdn-a.akamaihd.net/steam/apps/1316910/library_600x900_2x.jpg", 
-                desc: "Incline o cenário para guiar os macaquinhos.", 
-                url: "#" 
-            },
-            { 
-                name: "Sonic Adventure", 
-                platforms: ["DREAMCAST"], 
-                image: "https://steamcdn-a.akamaihd.net/steam/apps/71250/library_600x900_2x.jpg", 
-                desc: "A primeira grande aventura totalmente em 3D do Sonic.", 
-                url: "#" 
-            }
+            { name: "Super Mario World", idTag: "SNES-001", platforms: ["SNES"], image: "https://steamcdn-a.akamaihd.net/steam/apps/1794680/library_600x900_2x.jpg", desc: "O clássico supremo de plataforma do Super Nintendo.", url: "#" },
+            { name: "Donkey Kong Country", idTag: "SNES-002", platforms: ["SNES"], image: "https://steamcdn-a.akamaihd.net/steam/apps/2936460/library_600x900_2x.jpg", desc: "A incrível jornada de Donkey e Diddy Kong na ilha dos macacos.", url: "#" },
+            { name: "Super Monkey Ball", idTag: "GC-001", platforms: ["GAMECUBE"], image: "https://steamcdn-a.akamaihd.net/steam/apps/1316910/library_600x900_2x.jpg", desc: "Incline o cenário para guiar os macaquinhos.", url: "#" },
+            { name: "Sonic Adventure", idTag: "DC-001", platforms: ["DREAMCAST"], image: "https://steamcdn-a.akamaihd.net/steam/apps/71250/library_600x900_2x.jpg", desc: "A primeira grande aventura totalmente em 3D do Sonic.", url: "#" }
         ];
 
         const emulatorsWikiData = {
@@ -443,61 +523,60 @@
             document.getElementById('sidebarOverlay').classList.toggle('active');
         }
 
+        /* FUNÇÃO DA WIKI FLUTUANTE (MÓDULO ISOLADO CONTRA ERROS DE CACHE) */
         function openGameWiki(jogo) {
-            document.getElementById('btnBack').classList.remove('hidden');
-            document.getElementById('sectionTitle').innerText = "Arquivo / Enciclopédia de Jogos";
-            
-            const grid = document.getElementById('mainGrid');
-            // Alterado para um banner escuro neutro para evitar misturar fotos de jogos diferentes
             const fallbackWikiImg = "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=60";
-
             const wiki = jogo.wikiData || {
-                developer: "Desconhecido / Oficial",
-                year: "Clássico",
-                format: ".ROM / .ISO",
+                developer: "Official Developer",
+                year: "Retro Classic",
+                format: ".ISO / .ROM",
                 gallery: [fallbackWikiImg],
                 extendedContent: `<p>${jogo.desc}</p>`
             };
 
-            let galleryHtml = '';
-            // Agora puxa explicitamente a URL correta do array de cada jogo
+            let screenshotsHtml = '';
             wiki.gallery.forEach(imgUrl => {
-                galleryHtml += `
-                    <div class="gallery-img-wrapper">
-                        <img src="${imgUrl}" alt="Screenshot" onerror="this.src='${fallbackWikiImg}'">
+                screenshotsHtml += `
+                    <div class="wiki-screenshot-wrapper">
+                        <img src="${imgUrl}" alt="Gameplay" onerror="this.src='${fallbackWikiImg}'">
                     </div>
                 `;
             });
 
-            grid.innerHTML = `
-                <div class="wiki-container">
-                    <div class="wiki-title-area">
-                        <h2>${jogo.name}</h2>
-                        <span class="wiki-system-badge">${jogo.platforms.join(" / ")}</span>
-                    </div>
+            const contentArea = document.getElementById('modalDynamicContent');
+            contentArea.innerHTML = `
+                <div class="wiki-header">
+                    <h2 class="wiki-title">${jogo.name} Wiki</h2>
+                    <span class="wiki-badge">${jogo.platforms.join(" / ")}</span>
+                </div>
 
-                    <div class="game-info-meta">
-                        <div class="meta-item"><strong>Desenvolvedora</strong><span>${wiki.developer}</span></div>
-                        <div class="meta-item"><strong>Ano de Lançamento</strong><span>${wiki.year}</span></div>
-                        <div class="meta-item"><strong>Formato Padrão</strong><span>${wiki.format}</span></div>
-                    </div>
+                <div class="wiki-grid-layout">
+                    ${screenshotsHtml}
+                </div>
+                <div style="font-size:0.8rem; color:#527885; text-align:center; margin-top:-10px; margin-bottom:15px;">${jogo.idTag} gameplay</div>
 
-                    <div class="wiki-text">
-                        ${wiki.extendedContent}
-                    </div>
+                <ul class="wiki-meta-list">
+                    <li><strong>Desenvolvedora:</strong> ${wiki.developer}</li>
+                    <li><strong>Ano de Lançamento:</strong> ${wiki.year}</li>
+                    <li><strong>Formato Padrão:</strong> ${wiki.format}</li>
+                </ul>
 
-                    <h3 style="color: #fff; font-size: 1.2rem; border-left: 3px solid #00f3ff; padding-left: 10px; margin-top: 30px;">Galeria de Screenshots</h3>
-                    <div class="wiki-gallery">
-                        ${galleryHtml}
-                    </div>
+                <div class="wiki-description">
+                    ${wiki.extendedContent}
+                </div>
 
-                    <div class="wiki-download-box">
-                        <a href="${jogo.url}" target="_blank" rel="noreferrer" class="wiki-download-btn">
-                            📥 Baixar ROM / ISO de ${jogo.name}
-                        </a>
-                    </div>
+                <div class="wiki-download-action">
+                    <a href="${jogo.url}" target="_blank" rel="noreferrer" class="download-btn">
+                        📥 Baixar ISO / ROM
+                    </a>
                 </div>
             `;
+
+            document.getElementById('wikiModalOverlay').classList.add('active');
+        }
+
+        function closeGameWiki() {
+            document.getElementById('wikiModalOverlay').classList.remove('active');
         }
 
         function showEmulatorWiki(emuKey) {
@@ -505,32 +584,29 @@
             const data = emulatorsWikiData[emuKey];
             if (!data) return;
 
-            document.getElementById('btnBack').classList.remove('hidden');
-            document.getElementById('sectionTitle').innerText = "Enciclopédia de Emuladores";
-            
-            const grid = document.getElementById('mainGrid');
-            grid.innerHTML = `
-                <div class="wiki-container">
-                    <div class="wiki-title-area">
-                        <h2>${data.name}</h2>
-                        <span class="wiki-system-badge">${data.system}</span>
-                    </div>
-                    <div class="wiki-text">${data.htmlContent}</div>
-                    <div class="wiki-download-box">
-                        <a href="${data.downloadUrl}" target="_blank" rel="noreferrer" class="wiki-download-btn">📥 Baixar ${data.name}</a>
-                    </div>
+            const contentArea = document.getElementById('modalDynamicContent');
+            contentArea.innerHTML = `
+                <div class="wiki-header">
+                    <h2 class="wiki-title">${data.name}</h2>
+                    <span class="wiki-badge">${data.system}</span>
+                </div>
+                <div class="wiki-description">${data.htmlContent}</div>
+                <div class="wiki-download-action">
+                    <a href="${data.downloadUrl}" target="_blank" rel="noreferrer" class="download-btn">📥 Baixar Emulador</a>
                 </div>
             `;
+            document.getElementById('wikiModalOverlay').classList.add('active');
         }
 
         function showConsoleGames(consoleId) {
             const grid = document.getElementById('mainGrid');
             grid.innerHTML = ''; 
+            grid.className = 'games-grid-layout';
             document.getElementById('btnBack').classList.remove('hidden');
             
             const consoleCard = document.getElementById('console-' + consoleId);
             const consoleName = consoleCard ? consoleCard.dataset.name : consoleId;
-            document.getElementById('sectionTitle').innerText = "Jogos de " + consoleName;
+            document.getElementById('sectionTitle').innerText = "Curated games for " + consoleId;
             
             const filteredGames = databaseGamesList.filter(g => g.platforms.includes(consoleId));
             renderGames(filteredGames);
@@ -539,7 +615,7 @@
         function renderGames(gamesList) {
             const grid = document.getElementById('mainGrid');
             if (gamesList.length === 0) {
-                grid.innerHTML = `<p style="color:#666; padding: 20px; grid-column: 1/-1;">Nenhum jogo cadastrado nesta seção.</p>`;
+                grid.innerHTML = `<p style="color:#527885; padding: 20px; grid-column: 1/-1;">Nenhum jogo cadastrado nesta seção.</p>`;
                 return;
             }
 
@@ -547,14 +623,12 @@
                 const card = document.createElement('div');
                 card.className = 'game-card';
                 
-                const defaultThumb = "https://steamcdn-a.akamaihd.net/steam/apps/1547000/library_600x900_2x.jpg";
-                
                 card.innerHTML = `
                     <div class="card-image-container">
-                        <img src="${jogo.image || defaultThumb}" alt="${jogo.name}" onerror="this.src='${defaultThumb}'">
+                        <img src="${jogo.image}" alt="${jogo.name}">
                     </div>
-                    <div class="console-name">${jogo.name}</div>
-                    <div class="game-subtitle">Abrir Enciclopédia Wiki</div>
+                    <div class="game-title">${jogo.name}</div>
+                    <div class="game-id-tag">${jogo.idTag}</div>
                 `;
                 card.onclick = () => openGameWiki(jogo);
                 grid.appendChild(card);
@@ -563,9 +637,10 @@
 
         function resetView() {
             document.getElementById('gameSearch').value = "";
-            document.getElementById('sectionTitle').innerText = "Consoles Disponíveis";
+            document.getElementById('sectionTitle').innerText = "Consoles";
             document.getElementById('btnBack').classList.add('hidden');
             const grid = document.getElementById('mainGrid');
+            grid.className = 'grid-layout';
             grid.innerHTML = ''; 
             consoleElements.forEach(c => grid.appendChild(c));
         }
@@ -578,6 +653,7 @@
             document.getElementById('sectionTitle').innerText = "Resultados da Busca:";
             
             const grid = document.getElementById('mainGrid');
+            grid.className = 'games-grid-layout';
             grid.innerHTML = '';
 
             const matches = databaseGamesList.filter(g => g.name.toLowerCase().includes(input));
