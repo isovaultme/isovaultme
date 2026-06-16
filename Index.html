@@ -344,7 +344,6 @@
     </div>
 
     <script>
-        /* Imagens alteradas para links oficiais verticais de alta qualidade */
         const databaseGamesList = [
             { 
                 name: "GTA San Andreas", 
@@ -449,7 +448,8 @@
             document.getElementById('sectionTitle').innerText = "Arquivo / Enciclopédia de Jogos";
             
             const grid = document.getElementById('mainGrid');
-            const fallbackWikiImg = "https://steamcdn-a.akamaihd.net/steam/apps/1547000/header.jpg";
+            // Alterado para um banner escuro neutro para evitar misturar fotos de jogos diferentes
+            const fallbackWikiImg = "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=60";
 
             const wiki = jogo.wikiData || {
                 developer: "Desconhecido / Oficial",
@@ -460,6 +460,7 @@
             };
 
             let galleryHtml = '';
+            // Agora puxa explicitamente a URL correta do array de cada jogo
             wiki.gallery.forEach(imgUrl => {
                 galleryHtml += `
                     <div class="gallery-img-wrapper">
