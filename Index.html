@@ -260,6 +260,7 @@
         <div class="section-title" id="sectionTitle">Consoles Disponíveis</div>
         <div class="grid-layout" id="mainGrid">
             
+            <!-- LISTA DE CONSOLES PERMANECE IGUAL -->
             <div id="console-NES" onclick="showConsoleGames('NES')" class="console-card default-console" data-name="Nintendinho">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVvDfOFkZK34rMl6Jvt-pF6P7F-jFjvG1f3dINXNku1w&s=10"></div>
                 <div class="console-name">Nintendinho</div>
@@ -344,12 +345,12 @@
     </div>
 
     <script>
-        /* CORREÇÃO DEFINITIVA: Restaurado seu link do GTA e atualizado o do RE4 para um servidor livre de bloqueios */
+        /* MODIFICADO: Capas carregadas usando o formato raw do repositório xlenore (Apenas 2D) */
         const databaseGamesList = [
             { 
                 name: "GTA San Andreas", 
                 platforms: ["PS2"], 
-                image: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/677af80a-4f37-4a8c-8228-1dc57a31cf6f/dimb5ft-01d1ce37-4c1a-470e-9d93-6901c0173b9c.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi82NzdhZjgwYS00ZjM3LTRhOGMtODIyOC0xZGM1N2EzMWNmNmYvZGltYjVmdC0wMWQxY2UzNy00YzFhLTQ3MGUtOWQ5My02OTAxYzAxNzNiOWMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.h9pJTy3Sf9j1rEs6q_9vMG6L0LV-LMx5V03cjGhZ6M8", 
+                image: "https://raw.githubusercontent.com/xlenore/ps2-covers/main/covers/default/SLUS-20946.png", 
                 desc: "Acompanhe a icônica história de CJ no estado de San Andreas.", 
                 url: "#",
                 wikiData: {
@@ -373,7 +374,7 @@
             { 
                 name: "Resident Evil 4", 
                 platforms: ["PS2"], 
-                image: "https://i.postimg.cc/mDLY6v55/re4-cover.png", 
+                image: "https://raw.githubusercontent.com/xlenore/ps2-covers/main/covers/default/SLUS-21134.png", 
                 desc: "Leon S. Kennedy em uma missão de resgate implacável contra uma seita biológica na Europa.", 
                 url: "#",
                 wikiData: {
@@ -429,7 +430,7 @@
         const emulatorsWikiData = {
             retroarch: { name: "RetroArch", system: "Multisistema", downloadUrl: "https://retroarch.com/", htmlContent: `<p>O <strong>RetroArch</strong> gerencia múltiplos emuladores dedicados através de núcleos ("cores").</p>` },
             project64: { name: "Project64", system: "Nintendo 64", downloadUrl: "https://pj64-emu.com/", htmlContent: `<p>O emulador clássico de Nintendo 64 estável e veloz.</p>` },
-            pcsx2: { name: "PCSX2", system: "PlayStation 2", downloadUrl: "https://pt.pcsx2.net/", htmlContent: `<p>Rode com maestria quase 100% do catálogo do PS2.</p>` },
+            pcsx2: { name: "PCSX2", system: "PlayStation 2", downloadUrl: "https://pt.pcsx2.net/", htmlContent: `<p>Rode com mestria quase 100% do catálogo do PS2.</p>` },
             dolphin: { name: "Dolphin", system: "GameCube / Wii", downloadUrl: "https://dolphin-emu.org/", htmlContent: `<p>Desempenho perfeito e preciso para as plataformas de disco da Nintendo.</p>` },
             ppsspp: { name: "PPSSPP", system: "PlayStation Portable", downloadUrl: "https://ppsspp.org/", htmlContent: `<p>Jogue games do primeiro portátil da Sony em Full HD.</p>` }
         };
