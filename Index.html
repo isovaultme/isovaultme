@@ -122,25 +122,77 @@
         .section-title { font-size: 1.4rem; color: #ffffff; margin-bottom: 25px; border-bottom: 2px solid #222225; padding-bottom: 5px; }
         
         /* GRID DE EXIBIÇÃO COLETIVA */
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
-        .console-card, .game-card { background-color: #131315; border-radius: 12px; overflow: hidden; text-align: center; text-decoration: none; color: inherit; display: flex; flex-direction: column; border: 1px solid #222225; cursor: pointer; transition: 0.2s; padding: 12px; box-sizing: border-box; }
-        .console-card:hover, .game-card:hover { border-color: #00f3ff; background-color: #17171a; box-shadow: 0 0 15px rgba(0, 243, 255, 0.15); }
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
         
-        /* CORRIGIDO: Recipiente ajustado para simular proporção de caixa física vertical (600x900) */
-        .card-image-container { width: 100%; height: 210px; background-color: #050506; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 10px; border-radius: 6px; border: 1px solid #222225; position: relative; }
+        /* ESTILIZAÇÃO DOS CARDS */
+        .console-card, .game-card { background-color: #131315; border-radius: 12px; overflow: hidden; text-align: center; text-decoration: none; color: inherit; display: flex; flex-direction: column; border: 1px solid #222225; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; padding: 12px; box-sizing: border-box; }
+        .console-card:hover { transform: translateY(-4px); border-color: #00f3ff; box-shadow: 0 5px 15px rgba(0, 243, 255, 0.2); }
+        .game-card:hover { transform: translateY(-6px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); }
         
-        /* CORRIGIDO: 'object-fit: cover' faz a imagem preencher o espaço inteiro da capa igual mídia física */
-        .card-image-container img { width: 100%; height: 100%; object-fit: cover; }
+        /* NOVO: CONTAINER DE CAPA FÍSICA ESTILO ACRÍLICO REALISTA */
+        .card-image-container { 
+            width: 100%; 
+            height: 240px; 
+            background-color: #050506; 
+            overflow: hidden; 
+            margin-bottom: 12px; 
+            border-radius: 4px; 
+            position: relative;
+            /* Efeito de borda plástica externa de capinha de DVD/CD */
+            border: 3px solid #2b2b30;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 2px 4px 8px rgba(0,0,0,0.4);
+        }
         
-        /* Consoles mantêm o ajuste original para não esticar logos */
-        .console-card .card-image-container { height: 110px; background-color: transparent; border: none; }
+        /* NOVO: Detalhe lateral simulando a lombada/dobra de plástico transparente esquerda da caixinha */
+        .card-image-container::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0.15), rgba(0,0,0,0.4));
+            z-index: 3;
+            border-right: 1px solid rgba(0,0,0,0.5);
+        }
+
+        /* NOVO: Reflexo de luz diagonal simulando o reflexo no plástico da capa */
+        .card-image-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 25%, transparent 25.1%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .card-image-container img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Consoles não usam o efeito de capinha acrílica */
+        .console-card .card-image-container { 
+            height: 110px; 
+            background-color: transparent; 
+            border: none; 
+            box-shadow: none;
+        }
+        .console-card .card-image-container::before, 
+        .console-card .card-image-container::after { display: none; }
         .console-card .card-image-container img { object-fit: contain; }
         
-        .console-name { font-weight: bold; color: #ffffff; font-size: 1rem; line-height: 1.2; }
-        .game-subtitle { font-size: 0.75rem; color: #00f3ff; margin-top: 6px; text-transform: uppercase; font-weight: bold; }
+        .console-name { font-weight: bold; color: #ffffff; font-size: 0.95rem; line-height: 1.3; margin-top: 4px; }
+        .game-subtitle { font-size: 0.7rem; color: #00f3ff; margin-top: 6px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; }
         .hidden { display: none !important; }
 
-        /* ESTRUTURA VISUAL DA WIKI (EMULADORES E JOGOS) */
+        /* ESTRUTURA VISUAL DA WIKI */
         .wiki-container { background: #131315; border: 1px solid #222225; border-radius: 16px; padding: 30px; margin-top: 10px; }
         .wiki-title-area { display: flex; align-items: center; flex-wrap: wrap; gap: 15px; border-bottom: 2px solid #222225; padding-bottom: 15px; margin-bottom: 20px; }
         .wiki-title-area h2 { margin: 0; font-size: 2rem; color: #fff; }
@@ -150,7 +202,7 @@
         .wiki-text ul { padding-left: 20px; margin: 10px 0; }
         .wiki-text li { margin-bottom: 6px; }
         
-        /* GALERIA DE IMAGENS DA WIKI DO JOGO */
+        /* GALERIA DE IMAGENS DA WIKI */
         .wiki-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 25px 0; }
         .gallery-img-wrapper { height: 160px; border-radius: 8px; border: 1px solid #222225; overflow: hidden; background-color: #000; }
         .gallery-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
@@ -166,16 +218,15 @@
         .wiki-download-btn { display: inline-block; padding: 15px 40px; background: #00f3ff; color: #000; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 0 20px rgba(0, 243, 255, 0.3); transition: 0.2s; }
         .wiki-download-btn:hover { background: #ffffff; box-shadow: 0 0 25px rgba(255, 255, 255, 0.5); transform: scale(1.03); }
 
-        /* RESPONSIVIDADE */
+        /* RESPONSIVIDADE TEMPLATE */
         @media (min-width: 600px) {
             .grid-layout { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
-            .card-image-container { height: 240px; }
+            .card-image-container { height: 260px; }
             .console-card .card-image-container { height: 120px; }
-            .console-name { font-size: 1.1rem; }
         }
         @media (min-width: 900px) {
             .grid-layout { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 25px; }
-            .card-image-container { height: 270px; }
+            .card-image-container { height: 290px; }
         }
     </style>
 </head>
@@ -294,8 +345,32 @@
     </div>
 
     <script>
-        /* CORRIGIDO: Links alterados estritamente para as capas verticais oficiais de estilo caixa física (600x900) */
+        /* Adicionado o link exato que você mandou diretamente no GTA San Andreas para você testar! */
         const databaseGamesList = [
+            { 
+                name: "GTA San Andreas", 
+                platforms: ["PS2"], 
+                image: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/677af80a-4f37-4a8c-8228-1dc57a31cf6f/dimb5ft-01d1ce37-4c1a-470e-9d93-6901c0173b9c.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi82NzdhZjgwYS00ZjM3LTRhOGMtODIyOC0xZGM1N2EzMWNmNmYvZGltYjVmdC0wMWQxY2UzNy00YzFhLTQ3MGUtOWQ5My02OTAxYzAxNzNiOWMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.h9pJTy3Sf9j1rEs6q_9vMG6L0LV-LMx5V03cjGhZ6M8", 
+                desc: "Acompanhe a icônica história de CJ no estado de San Andreas.", 
+                url: "#",
+                wikiData: {
+                    developer: "Rockstar North",
+                    year: "2004",
+                    format: ".ISO / .CHD",
+                    gallery: [
+                        "https://steamcdn-a.akamaihd.net/steam/apps/1547000/ss_e1919b673dfa166160ffea0d23f37b98a39f60bf.600x338.jpg", 
+                        "https://steamcdn-a.akamaihd.net/steam/apps/1547000/ss_e04664ff6e36d5fc28b5e52c8030be908fc9b106.600x338.jpg"
+                    ],
+                    extendedContent: `
+                        <p>Carl Johnson precisa voltar para casa. Sua mãe foi assassinada, sua família desmoronou e seus amigos de infância estão todos caminhando para o desastre.</p>
+                        <h3>Recursos do Jogo</h3>
+                        <ul>
+                            <li><strong>Mapa Absurdo:</strong> Três cidades completas baseadas no mundo real (Los Santos, San Fierro e Las Venturas).</li>
+                            <li><strong>Customização:</strong> Mecânicas de RPG onde o CJ pode malhar, mudar cortes de cabelo e roupas.</li>
+                        </ul>
+                    `
+                }
+            },
             { 
                 name: "Super Mario World", 
                 platforms: ["SNES"], 
@@ -314,58 +389,31 @@
                 name: "Super Monkey Ball", 
                 platforms: ["GAMECUBE"], 
                 image: "https://steamcdn-a.akamaihd.net/steam/apps/1316910/library_600x900_2x.jpg", 
-                desc: "Incline o cenário para guiar os macaquinhos nas esferas até o objetivo.", 
+                desc: "Incline o cenário para guiar os macaquinhos.", 
                 url: "#" 
-            },
-            { 
-                name: "GTA San Andreas", 
-                platforms: ["PS2"], 
-                image: "https://steamcdn-a.akamaihd.net/steam/apps/1547000/library_600x900_2x.jpg", 
-                desc: "Acompanhe a icônica história de CJ no estado de San Andreas.", 
-                url: "#",
-                wikiData: {
-                    developer: "Rockstar North",
-                    year: "2004",
-                    format: ".ISO / .CHD",
-                    gallery: [
-                        "https://steamcdn-a.akamaihd.net/steam/apps/1547000/ss_e1919b673dfa166160ffea0d23f37b98a39f60bf.600x338.jpg", 
-                        "https://steamcdn-a.akamaihd.net/steam/apps/1547000/ss_e04664ff6e36d5fc28b5e52c8030be908fc9b106.600x338.jpg", 
-                        "https://steamcdn-a.akamaihd.net/steam/apps/1547000/ss_8e79435b86307a0914da694931a7707e7b6d1b7f.600x338.jpg"
-                    ],
-                    extendedContent: `
-                        <p>Há cinco anos, Carl Johnson escapou das pressões da vida em Los Santos, San Andreas... uma cidade se despedaçando com problemas de gangues, drogas e corrupção. Onde estrelas de cinema e milionários fazem o melhor para evitar os traficantes e os membros de gangues.</p>
-                        <p>Agora, estamos no início dos anos 90. Carl precisa voltar para casa. Sua mãe foi assassinada, sua família desmoronou e seus amigos de infância estão todos caminhando para o desastre.</p>
-                        <h3>Recursos Revolucionários para a Época</h3>
-                        <ul>
-                            <li><strong>Mapa Gigantesco:</strong> Três cidades completas baseadas no mundo real (Los Santos, San Fierro e Las Venturas), além de desertos e áreas rurais enormes.</li>
-                            <li><strong>Customização Absurda:</strong> Mecânicas de RPG onde o CJ pode ganhar músculos na academia, engordar comendo fast-food, mudar cortes de cabelo, tatuagens e roupas completas.</li>
-                            <li><strong>Guerra de Territórios:</strong> Conquiste bairros para a sua gangue (Grove Street Families) enfrentando os rivais Ballas e Vagos.</li>
-                        </ul>
-                    `
-                }
             },
             { 
                 name: "Resident Evil 4", 
                 platforms: ["PS2"], 
                 image: "https://steamcdn-a.akamaihd.net/steam/apps/2050650/library_600x900_2x.jpg", 
-                desc: "Leon S. Kennedy em uma missão de resgate implacável contra uma seita biológica.", 
+                desc: "Leon S. Kennedy em uma missão de resgate implacável.", 
                 url: "#" 
             },
             { 
                 name: "Sonic Adventure", 
                 platforms: ["DREAMCAST"], 
                 image: "https://steamcdn-a.akamaihd.net/steam/apps/71250/library_600x900_2x.jpg", 
-                desc: "A primeira grande e veloz aventura totalmente em 3D do Sonic.", 
+                desc: "A primeira grande aventura totalmente em 3D do Sonic.", 
                 url: "#" 
             }
         ];
 
         const emulatorsWikiData = {
-            retroarch: { name: "RetroArch", system: "Multisistema", downloadUrl: "https://retroarch.com/", htmlContent: `<p>O <strong>RetroArch</strong> gerencia múltiplos emuladores dedicados através de núcleos ("cores").</p><h3>Principais Recursos</h3><ul><li>Shaders avançados (telas CRT).</li><li>Modo multiplayer Netplay online.</li></ul>` },
-            project64: { name: "Project64", system: "Nintendo 64", downloadUrl: "https://pj64-emu.com/", htmlContent: `<p>O emulador clássico de Nintendo 64 estável e veloz.</p><h3>Principais Recursos</h3><ul><li>Upscale gráfico para HD.</li><li>Mapeamento nativo de analógicos.</li></ul>` },
-            pcsx2: { name: "PCSX2", system: "PlayStation 2", downloadUrl: "https://pt.pcsx2.net/", htmlContent: `<p>Rode com maestria quase 100% do catálogo do PS2.</p><h3>Principais Recursos</h3><ul><li>Gráficos internos escaláveis até 4K.</li><li>Memory cards virtuais infinitos.</li></ul>` },
-            dolphin: { name: "Dolphin", system: "GameCube / Wii", downloadUrl: "https://dolphin-emu.org/", htmlContent: `<p>Desempenho perfeito e preciso para as plataformas de disco da Nintendo.</p><h3>Principais Recursos</h3><ul><li>Mapeamento de Wiimotes reais via Bluetooth.</li><li>Carregamento de pacotes de texturas HD.</li></ul>` },
-            ppsspp: { name: "PPSSPP", system: "PlayStation Portable", downloadUrl: "https://ppsspp.org/", htmlContent: `<p>Jogue games do primeiro portátil da Sony em Full HD no computador.</p><h3>Principais Recursos</h3><ul><li>Leve, rápido e com ótimos filtros anti-serrilhado.</li></ul>` }
+            retroarch: { name: "RetroArch", system: "Multisistema", downloadUrl: "https://retroarch.com/", htmlContent: `<p>O <strong>RetroArch</strong> gerencia múltiplos emuladores dedicados através de núcleos ("cores").</p>` },
+            project64: { name: "Project64", system: "Nintendo 64", downloadUrl: "https://pj64-emu.com/", htmlContent: `<p>O emulador clássico de Nintendo 64 estável e veloz.</p>` },
+            pcsx2: { name: "PCSX2", system: "PlayStation 2", downloadUrl: "https://pt.pcsx2.net/", htmlContent: `<p>Rode com maestria quase 100% do catálogo do PS2.</p>` },
+            dolphin: { name: "Dolphin", system: "GameCube / Wii", downloadUrl: "https://dolphin-emu.org/", htmlContent: `<p>Desempenho perfeito e preciso para as plataformas de disco da Nintendo.</p>` },
+            ppsspp: { name: "PPSSPP", system: "PlayStation Portable", downloadUrl: "https://ppsspp.org/", htmlContent: `<p>Jogue games do primeiro portátil da Sony em Full HD.</p>` }
         };
 
         let consoleElements = [];
@@ -390,14 +438,14 @@
                 year: "Clássico",
                 format: ".ROM / .ISO",
                 gallery: [fallbackWikiImg],
-                extendedContent: `<p>${jogo.desc}</p><p>Nenhuma wiki detalhada foi cadastrada ainda para este título. Use o botão abaixo para obter o arquivo diretório.</p>`
+                extendedContent: `<p>${jogo.desc}</p>`
             };
 
             let galleryHtml = '';
             wiki.gallery.forEach(imgUrl => {
                 galleryHtml += `
                     <div class="gallery-img-wrapper">
-                        <img src="${imgUrl}" alt="Screenshot de ${jogo.name}" onerror="this.src='${fallbackWikiImg}'">
+                        <img src="${imgUrl}" alt="Screenshot" onerror="this.src='${fallbackWikiImg}'">
                     </div>
                 `;
             });
@@ -425,7 +473,6 @@
                     </div>
 
                     <div class="wiki-download-box">
-                        <p style="color:#777; margin-bottom: 15px;">Deseja baixar o arquivo compactado para o seu emulador?</p>
                         <a href="${jogo.url}" target="_blank" rel="noreferrer" class="wiki-download-btn">
                             📥 Baixar ROM / ISO de ${jogo.name}
                         </a>
@@ -451,8 +498,7 @@
                     </div>
                     <div class="wiki-text">${data.htmlContent}</div>
                     <div class="wiki-download-box">
-                        <p style="color:#777; margin-bottom: 15px;">Pronto para jogar? Obtenha a versão estável mais recente:</p>
-                        <a href="${data.downloadUrl}" target="_blank" rel="noreferrer" class="wiki-download-btn">📥 Baixar ${data.name} (Site Oficial)</a>
+                        <a href="${data.downloadUrl}" target="_blank" rel="noreferrer" class="wiki-download-btn">📥 Baixar ${data.name}</a>
                     </div>
                 </div>
             `;
