@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro ROMs & ISOs Vault (v0.3.1)</title>
+    <title>Retro ROMs & ISOs Vault (v0.4)</title>
     <style>
         /* ESTILOS E ANIMAÇÕES GERAIS */
         @keyframes fadeIn {
@@ -11,18 +11,17 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes modalSlideUp {
-            from { opacity: 0; transform: scale(0.95) translateY(30px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
         body { 
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; 
-            background: radial-gradient(circle at 50% 30%, #0d1e24 0%, #080f12 70%, #05080a 100%);
+            /* Mudamos para background-color + background-image para permitir transições suaves via JS */
+            background-color: #05080a;
+            background-image: radial-gradient(circle at 50% 30%, #0d1e24 0%, #080f12 70%, #05080a 100%);
+            background-attachment: fixed;
             color: #cfd8dc; 
             margin: 0; 
             padding: 0; 
             overflow-x: hidden;
+            transition: background 0.6s ease;
         }
 
         header { 
@@ -178,7 +177,7 @@
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
             gap: 16px; 
-            animation: fadeIn 0.4s ease out;
+            animation: fadeIn 0.4s ease-out;
         }
         .games-grid-layout {
             display: grid;
@@ -357,7 +356,6 @@
 </head>
 <body>
 
-    <!-- OVERLAYS E SIDEBAR -->
     <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
     <div id="sidebarMenu" class="sidebar">
         <div class="sidebar-header">
@@ -373,99 +371,96 @@
         </ul>
     </div>
 
-    <!-- HEADER PREMIUM -->
     <header>
         <button class="hamburger-btn" onclick="toggleSidebar()">&#9776;</button>
-        <h1 onclick="resetView()">🕹️ Retro ROMs & ISOs Vault<span class="version-tag">(v0.3.1)</span></h1>
+        <h1 onclick="resetView()">🕹️ Retro ROMs & ISOs Vault<span class="version-tag">(v0.4)</span></h1>
     </header>
 
-    <!-- BARRA DE PESQUISA -->
     <div class="controls-container">
         <button id="btnBack" class="btn-back hidden" onclick="resetView()">← Back</button>
         <input type="text" id="gameSearch" class="search-box" placeholder="Search..." oninput="searchGame()">
     </div>
 
-    <!-- AREA PRINCIPAL -->
     <div class="main-container">
         <div class="section-title" id="sectionTitle">Consoles</div>
         <div class="grid-layout" id="mainGrid">
             
-            <div id="console-NES" onclick="showConsoleGames('NES')" class="console-card default-console" data-name="Nintendinho">
+            <div id="console-NES" onclick="showConsoleGames('NES')" class="console-card default-console" data-name="Nintendinho" data-color="#3d0a0a">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVvDfOFkZK34rMl6Jvt-pF6P7F-jFjvG1f3dINXNku1w&s=10"></div>
                 <div class="console-name">Nintendinho</div>
             </div>
 
-            <div id="console-SNES" onclick="showConsoleGames('SNES')" class="console-card default-console" data-name="Super Nintendo">
+            <div id="console-SNES" onclick="showConsoleGames('SNES')" class="console-card default-console" data-name="Super Nintendo" data-color="#1f113a">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjpCe-RPoJqAbUnevMH5XcXc7VOwK6IjVyhq1Rq3A0xw&s=10"></div>
                 <div class="console-name">Super Nintendo</div>
             </div>
 
-            <div id="console-N64" onclick="showConsoleGames('N64')" class="console-card default-console" data-name="Nintendo 64">
+            <div id="console-N64" onclick="showConsoleGames('N64')" class="console-card default-console" data-name="Nintendo 64" data-color="#0a2416">
                 <div class="card-image-container"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Nintendo_64_Logo.svg"></div>
                 <div class="console-name">Nintendo 64</div>
             </div>
 
-            <div id="console-NDS" onclick="showConsoleGames('NDS')" class="console-card default-console" data-name="Nintendo DS">
+            <div id="console-NDS" onclick="showConsoleGames('NDS')" class="console-card default-console" data-name="Nintendo DS" data-color="#0a1a24">
                 <div class="card-image-container"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQfMqGRI4jyy-HBMJljpmB34cwAUvFtjEoqOV3yG_cBlUiEls8YWYmZWfq4gZIwIUhGGZ6b6kdKeYZDR8yRnMe2Bh6lnUhzm9qdcITf_DY-MTLjLQ6jqs9lyTkVUcR3-5rdMMAIq9Cygor/s1600/nintendo-ds-logo.jpg"></div>
                 <div class="console-name">Nintendo DS</div>
             </div>
 
-            <div id="console-3DS" onclick="showConsoleGames('3DS')" class="console-card default-console" data-name="Nintendo 3DS">
+            <div id="console-3DS" onclick="showConsoleGames('3DS')" class="console-card default-console" data-name="Nintendo 3DS" data-color="#3a0f18">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShSIMD14hkDAo8gOq7Hbn7ZRsy0W8sj1o1ov_AvHBL0A&s=10"></div>
                 <div class="console-name">Nintendo 3DS</div>
             </div>
 
-            <div id="console-GAMECUBE" onclick="showConsoleGames('GAMECUBE')" class="console-card default-console" data-name="GameCube">
+            <div id="console-GAMECUBE" onclick="showConsoleGames('GAMECUBE')" class="console-card default-console" data-name="GameCube" data-color="#230f3a">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8RFOJrMi0Q1FoCl3VRmcPd5_hiFjwbrc5_A&s"></div>
                 <div class="console-name">GameCube</div>
             </div>
 
-            <div id="console-WII" onclick="showConsoleGames('WII')" class="console-card default-console" data-name="Nintendo Wii">
+            <div id="console-WII" onclick="showConsoleGames('WII')" class="console-card default-console" data-name="Nintendo Wii" data-color="#24282a">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQln1jVUAgHlJPNXEAlBBy0IX7amuR2pi-M4bXvWJs-dg&s=10"></div>
                 <div class="console-name">Nintendo Wii</div>
             </div>
 
-            <div id="console-WIIU" onclick="showConsoleGames('WIIU')" class="console-card default-console" data-name="Wii U">
+            <div id="console-WIIU" onclick="showConsoleGames('WIIU')" class="console-card default-console" data-name="Wii U" data-color="#092135">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7NaIZxY--0G0sWyWtHjaMz_RTBZP_YbOcNA&s"></div>
                 <div class="console-name">Wii U</div>
             </div>
 
-            <div id="console-PS1" onclick="showConsoleGames('PS1')" class="console-card default-console" data-name="PlayStation 1">
+            <div id="console-PS1" onclick="showConsoleGames('PS1')" class="console-card default-console" data-name="PlayStation 1" data-color="#252420">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS8dmBnsz2pO2WoSLL-klu_jx-4sIKj3iL-w&s"></div>
                 <div class="console-name">PlayStation 1</div>
             </div>
 
-            <div id="console-PS2" onclick="showConsoleGames('PS2')" class="console-card default-console" data-name="PlayStation 2">
+            <div id="console-PS2" onclick="showConsoleGames('PS2')" class="console-card default-console" data-name="PlayStation 2" data-color="#05152b">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt0g5XCmQ1Pc3uq3eqgu5R5eP7UmwNevkjpA&s"></div>
                 <div class="console-name">PlayStation 2</div>
             </div>
 
-            <div id="console-PS3" onclick="showConsoleGames('PS3')" class="console-card default-console" data-name="PlayStation 3">
+            <div id="console-PS3" onclick="showConsoleGames('PS3')" class="console-card default-console" data-name="PlayStation 3" data-color="#141414">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0wBMLGyADI86fC9sCL9ZQ1zexFrQm003ecw&s"></div>
                 <div class="console-name">PlayStation 3</div>
             </div>
 
-            <div id="console-PSP" onclick="showConsoleGames('PSP')" class="console-card default-console" data-name="PlayStation Portable">
+            <div id="console-PSP" onclick="showConsoleGames('PSP')" class="console-card default-console" data-name="PlayStation Portable" data-color="#0a1d24">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvYRvwwzj8gCx_P37Kb6mEZ4Cs-haBHd_Y5A&s"></div>
                 <div class="console-name">PlayStation Portable</div>
             </div>
 
-            <div id="console-PSVITA" onclick="showConsoleGames('PSVITA')" class="console-card default-console" data-name="PS Vita">
+            <div id="console-PSVITA" onclick="showConsoleGames('PSVITA')" class="console-card default-console" data-name="PS Vita" data-color="#081e30">
                 <div class="card-image-container"><img src="https://i.ytimg.com/vi/5YRaapE2Jno/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgZShlMA8=&rs=AOn4CLDHPSKCeLy8knTWa5F2-M6ASlZLxw"></div>
                 <div class="console-name">PS Vita</div>
             </div>
 
-            <div id="console-XBOX" onclick="showConsoleGames('XBOX')" class="console-card default-console" data-name="Xbox Clássico">
+            <div id="console-XBOX" onclick="showConsoleGames('XBOX')" class="console-card default-console" data-name="Xbox Clássico" data-color="#082b0d">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3ViC1FcEYbn5wzrF-ylqadM1nDS8_rKa1T104AwweLGQ35KG33sJfkR8&s"></div>
                 <div class="console-name">Xbox Clássico</div>
             </div>
 
-            <div id="console-XBOX360" onclick="showConsoleGames('XBOX360')" class="console-card default-console" data-name="Xbox 360">
+            <div id="console-XBOX360" onclick="showConsoleGames('XBOX360')" class="console-card default-console" data-name="Xbox 360" data-color="#1b2e10">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHL9R_4O-chymaE-q-ODd3BBXmmzqehQuYuw&s"></div>
                 <div class="console-name">Xbox 360</div>
             </div>
 
-            <div id="console-DREAMCAST" onclick="showConsoleGames('DREAMCAST')" class="console-card default-console" data-name="Sega Dreamcast">
+            <div id="console-DREAMCAST" onclick="showConsoleGames('DREAMCAST')" class="console-card default-console" data-name="Sega Dreamcast" data-color="#381808">
                 <div class="card-image-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjfmE4s667CdDm85VYwZ1oNFO-TqI_Q9G-8QG4uAX69Q&s=10"></div>
                 <div class="console-name">Sega Dreamcast</div>
             </div>
@@ -473,7 +468,6 @@
         </div>
     </div>
 
-    <!-- JANELA MODAL FLUTUANTE DA WIKI -->
     <div id="wikiModalOverlay" class="modal-overlay" onclick="closeGameWiki()">
         <div class="wiki-modal" onclick="event.stopPropagation()">
             <button class="modal-close-btn" onclick="closeGameWiki()">&times;</button>
@@ -482,6 +476,7 @@
     </div>
 
     <script>
+        // Links reais corrigidos via Imgur para garantir que as screenshots nunca quebrem!
         const databaseGamesList = [
             { 
                 name: "GTA San Andreas", 
@@ -495,9 +490,8 @@
                     year: "2004",
                     format: ".ISO / .CHD",
                     gallery: [
-                        "https://steamcdn-a.akamaihd.net/steam/apps/1547000/ss_e1919b673dfa166160ffea0d23f37b98a39f60bf.600x338.jpg", 
-                        "https://steamcdn-a.akamaihd.net/steam/apps/1547000/ss_e04664ff6e36d5fc28b5e52c8030be908fc9b106.600x338.jpg",
-                        "https://steamcdn-a.akamaihd.net/steam/apps/1547000/ss_8e37d0473fb48bf3978db421d33190df09a65f97.600x338.jpg"
+                        "https://i.imgur.com/8mbeZfO.jpeg",
+                        "https://i.imgur.com/39wF4A0.jpeg"
                     ],
                     extendedContent: `
                         <p>Carl Johnson precisa voltar para casa. Sua mãe foi assassinada, sua família desmoronou e seus amigos de infância estão todos caminhando para o desastre.</p>
@@ -521,9 +515,8 @@
                     year: "2005",
                     format: ".ISO / .GZ",
                     gallery: [
-                        "https://steamcdn-a.akamaihd.net/steam/apps/254700/ss_81e3c5ecb049d587000dfb4fc9213db1b60f1ee6.600x338.jpg",
-                        "https://steamcdn-a.akamaihd.net/steam/apps/254700/ss_164b38bf546764426b345b8495a896d9972b535d.600x338.jpg",
-                        "https://steamcdn-a.akamaihd.net/steam/apps/254700/ss_3a2b774676d5e1f0dfb2f3cf8f0f3ff0df5a5e3a.600x338.jpg"
+                        "https://i.imgur.com/K38mPhA.jpeg",
+                        "https://i.imgur.com/VpXhMUn.jpeg"
                     ],
                     extendedContent: `
                         <p>Seis anos se passaram desde a destruição de Raccoon City. Leon S. Kennedy é enviado para resgatar a filha do presidente, Ashley Graham, sequestrada por um culto macabro na Europa.</p>
@@ -560,10 +553,7 @@
             document.getElementById('sidebarOverlay').classList.toggle('active');
         }
 
-        /* FUNÇÃO CORRIGIDA - COR DE FUNDO NEUTRA EM CASO DE FALLBACK */
         function openGameWiki(jogo) {
-            // Removida a imagem do Unsplash para evitar o "bug do cara jogando"
-            // Agora, se a imagem falhar, ela simplesmente exibe um background escuro limpo do próprio CSS
             const wiki = jogo.wikiData || {
                 developer: "Official Developer",
                 year: "Retro Classic",
@@ -582,7 +572,6 @@
                     `;
                 });
             } else {
-                // Se o jogo não tiver imagens de galeria cadastradas
                 screenshotsHtml = `
                     <div class="wiki-screenshot-wrapper" style="background:#05090b; display:flex; align-items:center; justify-content:center; grid-column: 1/-1; height: 100px; border-style: dashed;">
                         <span style="color:#395863; font-size:0.9rem;">Galeria de imagens em breve</span>
@@ -646,12 +635,19 @@
         }
 
         function showConsoleGames(consoleId) {
+            const consoleCard = document.getElementById('console-' + consoleId);
+            
+            // TRANSICIONAR O FUNDO BASEADO NA IMAGEM/PLATAFORMA SELECIONADA
+            if(consoleCard && consoleCard.dataset.color) {
+                const targetColor = consoleCard.dataset.color;
+                document.body.style.backgroundImage = `radial-gradient(circle at 50% 30%, ${targetColor} 0%, #060b0e 75%, #030507 100%)`;
+            }
+
             const grid = document.getElementById('mainGrid');
             grid.innerHTML = ''; 
             grid.className = 'games-grid-layout';
             document.getElementById('btnBack').classList.remove('hidden');
             
-            const consoleCard = document.getElementById('console-' + consoleId);
             const consoleName = consoleCard ? consoleCard.dataset.name : consoleId;
             document.getElementById('sectionTitle').innerText = "Curated games for " + consoleId;
             
@@ -683,6 +679,9 @@
         }
 
         function resetView() {
+            // VOLTA PARA O GRADIENTE PADRÃO DO SITE
+            document.body.style.backgroundImage = `radial-gradient(circle at 50% 30%, #0d1e24 0%, #080f12 70%, #05080a 100%)`;
+
             document.getElementById('gameSearch').value = "";
             document.getElementById('sectionTitle').innerText = "Consoles";
             document.getElementById('btnBack').classList.add('hidden');
