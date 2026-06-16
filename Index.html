@@ -129,7 +129,7 @@
         .console-card:hover { transform: translateY(-4px); border-color: #00f3ff; box-shadow: 0 5px 15px rgba(0, 243, 255, 0.2); }
         .game-card:hover { transform: translateY(-6px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); }
         
-        /* NOVO: CONTAINER DE CAPA FÍSICA ESTILO ACRÍLICO REALISTA */
+        /* CONTAINER DE CAPA FÍSICA ESTILO ACRÍLICO REALISTA */
         .card-image-container { 
             width: 100%; 
             height: 240px; 
@@ -138,12 +138,11 @@
             margin-bottom: 12px; 
             border-radius: 4px; 
             position: relative;
-            /* Efeito de borda plástica externa de capinha de DVD/CD */
             border: 3px solid #2b2b30;
             box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 2px 4px 8px rgba(0,0,0,0.4);
         }
         
-        /* NOVO: Detalhe lateral simulando a lombada/dobra de plástico transparente esquerda da caixinha */
+        /* Detalhe lateral simulando a lombada/dobra de plástico transparente esquerda da caixinha */
         .card-image-container::before {
             content: '';
             position: absolute;
@@ -156,7 +155,7 @@
             border-right: 1px solid rgba(0,0,0,0.5);
         }
 
-        /* NOVO: Reflexo de luz diagonal simulando o reflexo no plástico da capa */
+        /* Reflexo de luz diagonal simulando o reflexo no plástico da capa */
         .card-image-container::after {
             content: '';
             position: absolute;
@@ -345,12 +344,12 @@
     </div>
 
     <script>
-        /* Adicionado o link exato que você mandou diretamente no GTA San Andreas para você testar! */
+        /* MUDANÇA: Links alterados para servidores do Imgur para evitar que o navegador bloqueie por segurança! */
         const databaseGamesList = [
             { 
                 name: "GTA San Andreas", 
                 platforms: ["PS2"], 
-                image: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/677af80a-4f37-4a8c-8228-1dc57a31cf6f/dimb5ft-01d1ce37-4c1a-470e-9d93-6901c0173b9c.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi82NzdhZjgwYS00ZjM3LTRhOGMtODIyOC0xZGM1N2EzMWNmNmYvZGltYjVmdC0wMWQxY2UzNy00YzFhLTQ3MGUtOWQ5My02OTAxYzAxNzNiOWMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.h9pJTy3Sf9j1rEs6q_9vMG6L0LV-LMx5V03cjGhZ6M8", 
+                image: "https://i.imgur.com/E0ncoD2.png", 
                 desc: "Acompanhe a icônica história de CJ no estado de San Andreas.", 
                 url: "#",
                 wikiData: {
@@ -367,6 +366,32 @@
                         <ul>
                             <li><strong>Mapa Absurdo:</strong> Três cidades completas baseadas no mundo real (Los Santos, San Fierro e Las Venturas).</li>
                             <li><strong>Customização:</strong> Mecânicas de RPG onde o CJ pode malhar, mudar cortes de cabelo e roupas.</li>
+                        </ul>
+                    `
+                }
+            },
+            { 
+                name: "Resident Evil 4", 
+                platforms: ["PS2"], 
+                image: "https://i.imgur.com/XqT2R93.png", 
+                desc: "Leon S. Kennedy em uma missão de resgate implacável contra uma seita biológica na Europa.", 
+                url: "#",
+                wikiData: {
+                    developer: "Capcom Production Studio 4",
+                    year: "2005",
+                    format: ".ISO / .GZ",
+                    gallery: [
+                        "https://steamcdn-a.akamaihd.net/steam/apps/254700/ss_81e3c5ecb049d587000dfb4fc9213db1b60f1ee6.600x338.jpg",
+                        "https://steamcdn-a.akamaihd.net/steam/apps/254700/ss_164b38bf546764426b345b8495a896d9972b535d.600x338.jpg"
+                    ],
+                    extendedContent: `
+                        <p>Seis anos se passaram desde a destruição de Raccoon City. Leon S. Kennedy, agora um agente trabalhando diretamente sob as ordens do presidente dos EUA, é enviado para resgatar a filha sequestrada do presidente, Ashley Graham.</p>
+                        <p>Seguindo pistas até uma vila rural isolada na Europa, Leon descobre que os habitantes locais não são zumbis comuns, mas sim humanos controlados por um parasita mental devastador conhecido como 'Las Plagas'.</p>
+                        <h3>Inovações do Game</h3>
+                        <ul>
+                            <li><strong>Câmera Sobre o Ombro:</strong> Redefiniu completamente o gênero de tiro em terceira pessoa (TPS) para a indústria de jogos.</li>
+                            <li><strong>Gerenciamento de Maleta:</strong> O famoso inventário estilo quebra-cabeça (Grid System) onde você precisa girar e organizar armas e ervas.</li>
+                            <li><strong>Ação e Sobrevivência:</strong> Equilíbrio perfeito entre o terror claustrofóbico clássico e combates dinâmicos com chutes e golpes físicos.</li>
                         </ul>
                     `
                 }
@@ -390,13 +415,6 @@
                 platforms: ["GAMECUBE"], 
                 image: "https://steamcdn-a.akamaihd.net/steam/apps/1316910/library_600x900_2x.jpg", 
                 desc: "Incline o cenário para guiar os macaquinhos.", 
-                url: "#" 
-            },
-            { 
-                name: "Resident Evil 4", 
-                platforms: ["PS2"], 
-                image: "https://steamcdn-a.akamaihd.net/steam/apps/2050650/library_600x900_2x.jpg", 
-                desc: "Leon S. Kennedy em uma missão de resgate implacável.", 
                 url: "#" 
             },
             { 
