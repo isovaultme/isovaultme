@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro ROMs & ISOs Vault (v0.3)</title>
+    <title>Retro ROMs & ISOs Vault (v0.3.1)</title>
     <style>
+        /* ESTILOS E ANIMAÇÕES GERAIS */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes modalSlideUp {
+            from { opacity: 0; transform: scale(0.95) translateY(30px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
         body { 
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; 
             background: radial-gradient(circle at 50% 30%, #0d1e24 0%, #080f12 70%, #05080a 100%);
@@ -27,6 +38,10 @@
             letter-spacing: 0.5px;
             text-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
             cursor: pointer; 
+            transition: text-shadow 0.3s ease;
+        }
+        header h1:hover {
+            text-shadow: 0 0 25px rgba(0, 243, 255, 0.6);
         }
         header .version-tag {
             font-size: 1rem;
@@ -47,12 +62,13 @@
             cursor: pointer;
             padding: 8px 15px;
             border-radius: 8px;
-            transition: 0.2s;
+            transition: all 0.2s ease;
             z-index: 90;
         }
         .hamburger-btn:hover { 
             background: rgba(0, 243, 255, 0.1);
             border-color: #00f3ff;
+            box-shadow: 0 0 12px rgba(0, 243, 255, 0.2);
         }
 
         /* SIDEBAR PREMIUM */
@@ -80,7 +96,7 @@
             margin-bottom: 25px;
         }
         .sidebar-title { color: #ffffff; font-size: 1.1rem; font-weight: 600; margin: 0; }
-        .sidebar-close { background: none; border: none; color: #527885; font-size: 2rem; cursor: pointer; line-height: 1; }
+        .sidebar-close { background: none; border: none; color: #527885; font-size: 2rem; cursor: pointer; line-height: 1; transition: color 0.2s; }
         .sidebar-close:hover { color: #ff3366; }
         .emulator-list { list-style: none; padding: 0; margin: 0; }
         .emulator-item { margin-bottom: 12px; }
@@ -93,12 +109,13 @@
             border-radius: 8px;
             color: #ffffff;
             text-decoration: none;
-            transition: 0.2s;
+            transition: all 0.2s ease;
             cursor: pointer;
         }
         .emulator-link:hover {
             border-color: #00f3ff;
             background-color: #10222b;
+            transform: translateX(4px);
         }
         .emu-name { font-weight: bold; font-size: 0.95rem; }
         .emu-system { font-size: 0.75rem; color: #00f3ff; margin-top: 2px; text-transform: uppercase; }
@@ -114,7 +131,7 @@
             z-index: 95;
             opacity: 0;
             pointer-events: none;
-            transition: 0.3s;
+            transition: opacity 0.3s ease;
         }
         .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
 
@@ -129,11 +146,12 @@
             color: #ffffff; 
             outline: none; 
             font-size: 0.95rem; 
-            transition: 0.2s;
+            transition: all 0.2s ease;
         }
         .search-box:focus {
             border-color: #00f3ff;
-            box-shadow: 0 0 10px rgba(0, 243, 255, 0.15);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.25);
+            background-color: rgba(16, 34, 43, 0.9);
         }
         .btn-back { 
             background-color: #0b141a; 
@@ -144,24 +162,32 @@
             cursor: pointer; 
             font-weight: 500; 
             font-size: 0.95rem;
-            transition: 0.2s;
+            transition: all 0.2s ease;
         }
         .btn-back:hover {
             background-color: #10222b;
             border-color: #00f3ff;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
         }
         
         .main-container { max-width: 1200px; margin: 10px auto 50px auto; padding: 0 30px; }
         .section-title { font-size: 1.2rem; font-weight: 600; color: #ffffff; margin: 30px 0 20px 0; letter-spacing: 0.5px; }
         
-        /* GRID DE CONSOLES COMPACTOS */
+        /* LAYOUTS COM ANIMAÇÃO ENTRADA */
         .grid-layout { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
             gap: 16px; 
+            animation: fadeIn 0.4s ease out;
+        }
+        .games-grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
+            animation: fadeIn 0.4s ease-out;
         }
         
-        /* CARD DE CONSOLE */
+        /* CARD DE CONSOLE ANIMADO */
         .console-card { 
             background: rgba(11, 20, 26, 0.4); 
             border: 1px solid #152933;
@@ -173,16 +199,16 @@
             align-items: center;
             justify-content: center;
             cursor: pointer; 
-            transition: all 0.2s ease; 
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
             padding: 15px 10px; 
             box-sizing: border-box; 
             height: 125px;
         }
         .console-card:hover { 
             border-color: #00f3ff; 
-            background: rgba(16, 34, 43, 0.6);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 243, 255, 0.1);
+            background: rgba(16, 34, 43, 0.7);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0, 243, 255, 0.15);
         }
         
         .console-card .card-image-container { 
@@ -192,6 +218,10 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 10px;
+            transition: transform 0.25s ease;
+        }
+        .console-card:hover .card-image-container {
+            transform: scale(1.08);
         }
         .console-card .card-image-container img { 
             max-width: 80%; 
@@ -199,31 +229,24 @@
             object-fit: contain; 
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
         }
-        .console-name { font-weight: 500; color: #9bb1bc; font-size: 0.85rem; }
+        .console-name { font-weight: 500; color: #9bb1bc; font-size: 0.85rem; transition: color 0.2s; }
         .console-card:hover .console-name { color: #ffffff; }
 
-        /* GRID DE JOGOS */
-        .games-grid-layout {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 20px;
-        }
-
-        /* CARD DE JOGO */
+        /* CARD DE JOGO ANIMADO */
         .game-card {
             background: #091014;
             border: 1px solid #14252e;
             border-radius: 8px;
             padding: 10px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
         }
         .game-card:hover {
             border-color: #00f3ff;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 243, 255, 0.05);
         }
         .game-card .card-image-container {
             width: 100%;
@@ -238,6 +261,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .game-card:hover .card-image-container img {
+            transform: scale(1.03);
         }
         .game-title {
             font-size: 0.9rem;
@@ -255,25 +282,25 @@
             font-family: monospace;
         }
 
-        /* POPUP MODAL DA WIKI DINÂMICA */
+        /* POPUP MODAL DA WIKI COM ANIMAÇÃO SLIDE-UP */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(3, 6, 8, 0.8);
-            backdrop-filter: blur(6px);
+            background: rgba(3, 6, 8, 0.85);
+            backdrop-filter: blur(8px);
             z-index: 200;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0; pointer-events: none;
-            transition: 0.2s ease;
+            transition: opacity 0.25s ease;
         }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
         
         .wiki-modal {
             background: #0b1419;
-            border: 1px solid #00f3ff;
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+            border: 1px solid #1c3d4a;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 243, 255, 0.1);
             border-radius: 12px;
             width: 90%;
             max-width: 800px;
@@ -282,17 +309,20 @@
             position: relative;
             padding: 30px;
             box-sizing: border-box;
-            transform: scale(0.95);
-            transition: 0.2s ease;
+            transform: scale(0.95) translateY(30px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1), border-color 0.3s;
         }
-        .modal-overlay.active .wiki-modal { transform: scale(1); }
+        .modal-overlay.active .wiki-modal { 
+            transform: scale(1) translateY(0); 
+            border-color: #00f3ff;
+        }
 
         .modal-close-btn {
             position: absolute;
             top: 20px; right: 20px;
             background: none; border: none;
             color: #527885; font-size: 1.8rem;
-            cursor: pointer; transition: 0.2s;
+            cursor: pointer; transition: color 0.2s;
         }
         .modal-close-btn:hover { color: #00f3ff; }
 
@@ -301,14 +331,16 @@
         .wiki-badge { background: rgba(0, 243, 255, 0.1); color: #00f3ff; border: 1px solid rgba(0, 243, 255, 0.3); padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
 
         .wiki-grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 20px 0; }
-        .wiki-screenshot-wrapper { height: 130px; border-radius: 6px; overflow: hidden; border: 1px solid #1c3542; background: #040709; }
-        .wiki-screenshot-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .wiki-screenshot-wrapper { height: 130px; border-radius: 6px; overflow: hidden; border: 1px solid #1c3542; background: #040709; position: relative; }
+        .wiki-screenshot-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .wiki-screenshot-wrapper:hover img { transform: scale(1.05); }
 
         .wiki-meta-list { list-style: none; padding: 0; margin: 15px 0; font-size: 0.9rem; color: #9bb1bc; }
         .wiki-meta-list li { margin-bottom: 6px; }
         .wiki-meta-list strong { color: #ffffff; }
 
         .wiki-description { color: #9bb1bc; font-size: 0.95rem; line-height: 1.6; }
+        .wiki-description h3 { color: #ffffff; font-size: 1.1rem; margin-top: 20px; border-left: 2px solid #00f3ff; padding-left: 8px; }
         .wiki-description ul { padding-left: 20px; color: #cfd8dc; }
 
         .wiki-download-action { text-align: center; margin-top: 30px; }
@@ -316,15 +348,16 @@
             display: inline-flex; align-items: center; gap: 8px;
             padding: 12px 35px; background: #1a73e8; color: white;
             text-decoration: none; border-radius: 6px; font-weight: 600;
-            font-size: 0.95rem; transition: 0.2s; box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+            font-size: 0.95rem; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
         }
-        .download-btn:hover { background: #34a853; box-shadow: 0 4px 15px rgba(52, 168, 83, 0.4); }
+        .download-btn:hover { background: #34a853; box-shadow: 0 4px 15px rgba(52, 168, 83, 0.4); transform: scale(1.02); }
 
         .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
+    <!-- OVERLAYS E SIDEBAR -->
     <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
     <div id="sidebarMenu" class="sidebar">
         <div class="sidebar-header">
@@ -340,16 +373,19 @@
         </ul>
     </div>
 
+    <!-- HEADER PREMIUM -->
     <header>
         <button class="hamburger-btn" onclick="toggleSidebar()">&#9776;</button>
-        <h1 onclick="resetView()">🕹️ Retro ROMs & ISOs Vault<span class="version-tag">(v0.3)</span></h1>
+        <h1 onclick="resetView()">🕹️ Retro ROMs & ISOs Vault<span class="version-tag">(v0.3.1)</span></h1>
     </header>
 
+    <!-- BARRA DE PESQUISA -->
     <div class="controls-container">
         <button id="btnBack" class="btn-back hidden" onclick="resetView()">← Back</button>
         <input type="text" id="gameSearch" class="search-box" placeholder="Search..." oninput="searchGame()">
     </div>
 
+    <!-- AREA PRINCIPAL -->
     <div class="main-container">
         <div class="section-title" id="sectionTitle">Consoles</div>
         <div class="grid-layout" id="mainGrid">
@@ -437,6 +473,7 @@
         </div>
     </div>
 
+    <!-- JANELA MODAL FLUTUANTE DA WIKI -->
     <div id="wikiModalOverlay" class="modal-overlay" onclick="closeGameWiki()">
         <div class="wiki-modal" onclick="event.stopPropagation()">
             <button class="modal-close-btn" onclick="closeGameWiki()">&times;</button>
@@ -523,25 +560,35 @@
             document.getElementById('sidebarOverlay').classList.toggle('active');
         }
 
-        /* FUNÇÃO DA WIKI FLUTUANTE (MÓDULO ISOLADO CONTRA ERROS DE CACHE) */
+        /* FUNÇÃO CORRIGIDA - COR DE FUNDO NEUTRA EM CASO DE FALLBACK */
         function openGameWiki(jogo) {
-            const fallbackWikiImg = "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=60";
+            // Removida a imagem do Unsplash para evitar o "bug do cara jogando"
+            // Agora, se a imagem falhar, ela simplesmente exibe um background escuro limpo do próprio CSS
             const wiki = jogo.wikiData || {
                 developer: "Official Developer",
                 year: "Retro Classic",
                 format: ".ISO / .ROM",
-                gallery: [fallbackWikiImg],
+                gallery: [],
                 extendedContent: `<p>${jogo.desc}</p>`
             };
 
             let screenshotsHtml = '';
-            wiki.gallery.forEach(imgUrl => {
-                screenshotsHtml += `
-                    <div class="wiki-screenshot-wrapper">
-                        <img src="${imgUrl}" alt="Gameplay" onerror="this.src='${fallbackWikiImg}'">
+            if (wiki.gallery && wiki.gallery.length > 0) {
+                wiki.gallery.forEach(imgUrl => {
+                    screenshotsHtml += `
+                        <div class="wiki-screenshot-wrapper">
+                            <img src="${imgUrl}" alt="Gameplay" onerror="this.style.display='none'">
+                        </div>
+                    `;
+                });
+            } else {
+                // Se o jogo não tiver imagens de galeria cadastradas
+                screenshotsHtml = `
+                    <div class="wiki-screenshot-wrapper" style="background:#05090b; display:flex; align-items:center; justify-content:center; grid-column: 1/-1; height: 100px; border-style: dashed;">
+                        <span style="color:#395863; font-size:0.9rem;">Galeria de imagens em breve</span>
                     </div>
                 `;
-            });
+            }
 
             const contentArea = document.getElementById('modalDynamicContent');
             contentArea.innerHTML = `
@@ -553,7 +600,7 @@
                 <div class="wiki-grid-layout">
                     ${screenshotsHtml}
                 </div>
-                <div style="font-size:0.8rem; color:#527885; text-align:center; margin-top:-10px; margin-bottom:15px;">${jogo.idTag} gameplay</div>
+                <div style="font-size:0.75rem; color:#527885; text-align:center; margin-top:-10px; margin-bottom:15px; font-family:monospace;">${jogo.idTag} active view</div>
 
                 <ul class="wiki-meta-list">
                     <li><strong>Desenvolvedora:</strong> ${wiki.developer}</li>
